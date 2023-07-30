@@ -1,5 +1,6 @@
 import { Data } from "./dataModel";
 import puppeteer from "puppeteer";
+import { sortByDateAndTime } from "./utils";
 
 export default async function getExams() {
   const browser = await puppeteer.launch({
@@ -39,5 +40,5 @@ export default async function getExams() {
   });
 
   await browser.close();
-  return { exams: mainData };
+  return { exams: sortByDateAndTime(mainData) };
 }
