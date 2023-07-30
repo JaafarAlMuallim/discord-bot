@@ -27,10 +27,6 @@ client.on("messageCreate", async (message) => {
     );
     return;
   }
-  if (message.content === "fk u") {
-    message.reply("fk u too");
-    return;
-  }
   if (message.content.startsWith("!courses")) {
     const args = message.content.split(" ");
     args.shift();

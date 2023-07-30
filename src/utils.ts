@@ -12,10 +12,11 @@ const sortByDateAndTime = (data: Data[]) => {
   const sortedByName = data.sort((a, b) =>
     a.courseName.localeCompare(b.courseName)
   );
+
   const sortedByTime = sortedByName.sort((a, b) => {
     const timeA = convertTimeTo24HourFormat(a.time);
     const timeB = convertTimeTo24HourFormat(b.time);
-    return timeA.localeCompare(timeB);
+    return timeA > timeB ? -1 : timeB > timeA ? 1 : 0;
   });
   const sortedByDate = sortedByTime.sort((a, b) =>
     a.date.localeCompare(b.date)

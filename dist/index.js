@@ -34,10 +34,6 @@ client.on("messageCreate", (message) => __awaiter(void 0, void 0, void 0, functi
         message.reply("To use this bot, type !exam followed by the course name.\nFor example, !exam MATH101 IAS101... and list all the courses you want to check.\nmake sure they are separated by spaces only\nUse !courses followed by the department code and course code. For example, !courses ICS ICS202 to get all section informations and status\n");
         return;
     }
-    if (message.content === "fk u") {
-        message.reply("fk u too");
-        return;
-    }
     if (message.content.startsWith("!courses")) {
         const args = message.content.split(" ");
         args.shift();

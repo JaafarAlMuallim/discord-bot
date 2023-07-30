@@ -40,5 +40,5 @@ export default async function getExams() {
   });
 
   await browser.close();
-  return { exams: sortByDateAndTime(mainData) };
+  return { exams: mainData };
 }

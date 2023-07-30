@@ -16,7 +16,7 @@ const sortByDateAndTime = (data) => {
     const sortedByTime = sortedByName.sort((a, b) => {
         const timeA = (0, exports.convertTimeTo24HourFormat)(a.time);
         const timeB = (0, exports.convertTimeTo24HourFormat)(b.time);
-        return timeA.localeCompare(timeB);
+        return timeA > timeB ? -1 : timeB > timeA ? 1 : 0;
     });
     const sortedByDate = sortedByTime.sort((a, b) => a.date.localeCompare(b.date));
     return sortedByDate;
