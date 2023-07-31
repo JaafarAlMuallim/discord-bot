@@ -41,16 +41,14 @@ client.on("messageCreate", (message) => __awaiter(void 0, void 0, void 0, functi
             message.reply("Please provide a valid department code and valid course code");
             return;
         }
-        const sentMessage = yield message.channel.send(`Loading...`);
+        yield message.channel.sendTyping();
         const courses = yield (0, getCourses_1.default)(args[0] === "SWE" ? "ICS" : args[0]);
         const filteredCourses = courses.courses.filter((course) => course.courseSec.includes((0, utils_1.formatString)(args[1])));
         if (filteredCourses) {
-            console.log(filteredCourses);
             const toSendMessage = [];
             for (const course of filteredCourses) {
                 toSendMessage.push(`${course.instructor} ${course.location} ${course.day} ${course.time}\n${course.status} ${course.crn}`);
             }
-            sentMessage.delete();
             message.reply(toSendMessage.join("\n\n"));
             return;
         }
@@ -74,7 +72,7 @@ client.on("messageCreate", (message) => __awaiter(void 0, void 0, void 0, functi
             return;
         }
         else {
-            const sentMessage = yield message.channel.send(`Loading...`);
+            yield message.channel.sendTyping();
             const toSendMessage = [];
             const courseInfo = [];
             try {
@@ -93,7 +91,6 @@ client.on("messageCreate", (message) => __awaiter(void 0, void 0, void 0, functi
                     toSendMessage.push(`- Course ID: ${(0, utils_1.formatString)(courseId)}\nDate: ${date}\nDay: ${day}\n Time: ${(0, utils_1.convertTimeTo24HourFormat)(time)}\nLocation: ${location}`);
                     text += `${(0, utils_1.formatString)(courseId)} ${(0, utils_1.convertTimeTo24HourFormat)(time)} ${date} ${day} ${location}\n`;
                 }
-                sentMessage.delete();
                 message.reply({
                     content: `${toSendMessage.join("\n----------------------------------\n")}`,
                     files: [

@@ -36,20 +36,18 @@ client.on("messageCreate", async (message) => {
       );
       return;
     }
-    const sentMessage = await message.channel.send(`Loading...`);
+    await message.channel.sendTyping();
     const courses = await getCourses(args[0] === "SWE" ? "ICS" : args[0]);
     const filteredCourses: Course[] | undefined = courses.courses.filter(
       (course) => course.courseSec.includes(formatString(args[1]))
     );
     if (filteredCourses) {
-      console.log(filteredCourses);
       const toSendMessage: string[] = [];
       for (const course of filteredCourses) {
         toSendMessage.push(
           `${course.instructor} ${course.location} ${course.day} ${course.time}\n${course.status} ${course.crn}`
         );
       }
-      sentMessage.delete();
       message.reply(toSendMessage.join("\n\n"));
       return;
     } else {
@@ -71,7 +69,7 @@ client.on("messageCreate", async (message) => {
       message.reply("Please provide a valid course name");
       return;
     } else {
-      const sentMessage = await message.channel.send(`Loading...`);
+      await message.channel.sendTyping();
       const toSendMessage: string[] = [];
       const courseInfo: Data[] = [];
       try {
@@ -100,7 +98,6 @@ client.on("messageCreate", async (message) => {
             time
           )} ${date} ${day} ${location}\n`;
         }
-        sentMessage.delete();
         message.reply({
           content: `${toSendMessage.join(
             "\n----------------------------------\n"

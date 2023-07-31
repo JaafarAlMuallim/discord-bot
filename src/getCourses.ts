@@ -13,7 +13,6 @@ export default async function getCourses(code: string) {
   await page.select("#term_code", "202310");
   await page.select("#dept_code", code);
   await page.waitForSelector("table");
-  await page.screenshot({ path: "example.png" });
   const mainData = await page.evaluate(() => {
     const trs: HTMLDataElement[] = Array.from(
       document.querySelectorAll("div div table tr")
